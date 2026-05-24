@@ -1,0 +1,21 @@
+#cloud-config
+package_update: true
+packages:
+  - stress-ng
+  - sysstat
+  - curl
+  - jq
+
+write_files:
+  - path: /usr/local/bin/demo-load.sh
+    permissions: "0755"
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+      stress-ng --cpu 1 --io 1 --vm 1 --vm-bytes 128M --timeout "$${1:-180s}" --metrics-brief
+
+runcmd:
+  - systemctl enable sysstat
+  - systemctl start sysstat
+  - echo "Run sudo demo-load.sh 300s to generate CPU, IO, and memory metrics for Azure Monitor."
+

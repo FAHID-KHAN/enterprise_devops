@@ -1,0 +1,12 @@
+project_name        = "cloud-monitor"
+environment         = "demo"
+location            = "westeurope"
+owner               = "portfolio"
+admin_username      = "azureuser"
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
+
+# Safer: replace with your current public IP, e.g. "203.0.113.10/32".
+allowed_ssh_cidr = "0.0.0.0/0"
+
+# Keep this small enough for the portfolio demo and make sure its VM family has quota.
+vm_size = "Standard_D2s_v3"
